@@ -21,8 +21,7 @@ public class AbstractEncryptDecryptLincenseKey implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Inject
-    private AsymmetricCipherKeyPair rsaKeys;
+    private @Inject AsymmetricCipherKeyPair rsaKeys;
 
     public void setRsaKeys(final AsymmetricCipherKeyPair rsaKeys) {
         this.rsaKeys = rsaKeys;
