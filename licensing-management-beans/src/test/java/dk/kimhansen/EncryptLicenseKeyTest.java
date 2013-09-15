@@ -1,6 +1,7 @@
 package dk.kimhansen;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,8 +11,7 @@ public class EncryptLicenseKeyTest extends AbstractLicenceManagementTest {
 
     @Before
     public void setUp() {
-        encrypt = new EncryptLicenseKey();
-        encrypt.setRsaKeys(readKeysFromFile());
+        encrypt = new EncryptLicenseKey(readKeysFromFile());
     }
 
     @Test
@@ -20,7 +20,7 @@ public class EncryptLicenseKeyTest extends AbstractLicenceManagementTest {
 
         String cipherText = encrypt.encrypt(info);
         System.out.println(cipherText);
-        Assert.assertEquals(cipherText, getCipherText());
+        assertEquals(cipherText, CIPHER_TEXT);
     }
 
 }

@@ -1,22 +1,23 @@
 package dk.kimhansen;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class DecryptLicenseKeyTest extends AbstractLicenceManagementTest {
-    DecryptLicenseKey decryptLicenseKey;
+
+    private DecryptLicenseKey decryptLicenseKey;
 
     @Before
     public void setUp() {
-        decryptLicenseKey = new DecryptLicenseKey();
-        decryptLicenseKey.setRsaKeys(readKeysFromFile());
+        decryptLicenseKey = new DecryptLicenseKey(readKeysFromFile());
     }
 
     @Test
     public void testDecrypt() throws Exception {
-        LicenseInformation decrypted = decryptLicenseKey.decrypt(getCipherText());
-        Assert.assertEquals(createTestData(), decrypted);
+        LicenseInformation decrypted = decryptLicenseKey.decrypt(CIPHER_TEXT);
+        assertEquals(createTestData(), decrypted);
     }
 
 }

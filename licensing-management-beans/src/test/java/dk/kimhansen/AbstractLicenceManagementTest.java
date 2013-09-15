@@ -21,12 +21,13 @@ import com.esotericsoftware.kryo.io.Output;
 
 public class AbstractLicenceManagementTest {
 
-    public String getCipherText() {
+    public static final String CIPHER_TEXT = getCipherText();
+
+    private static String getCipherText() {
         try {
             File file = new File(AbstractLicenceManagementTest.class.getClassLoader().getResource("cipher.txt").getFile());
             return FileUtils.readFileToString(file);
-        } catch (IOException e) {
-        }
+        } catch (IOException e) {}
 
         return "";
     }

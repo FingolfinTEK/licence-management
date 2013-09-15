@@ -7,6 +7,7 @@ import javax.inject.Named;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.SerializationUtils;
+import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.DataLengthException;
 import org.bouncycastle.crypto.InvalidCipherTextException;
 import org.bouncycastle.crypto.engines.RSAEngine;
@@ -17,6 +18,10 @@ import org.bouncycastle.util.encoders.Base64;
 public class DecryptLicenseKey extends AbstractEncryptDecryptLincenseKey {
 
     private static final long serialVersionUID = 1L;
+
+    public DecryptLicenseKey(final AsymmetricCipherKeyPair rsaKeys) {
+        super(rsaKeys);
+    }
 
     public LicenseInformation decrypt(final String crypted) throws DataLengthException, IllegalStateException, InvalidCipherTextException,
             UnsupportedEncodingException {

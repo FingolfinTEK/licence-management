@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.time.DateUtils;
 
 public class LicenseInformation implements Serializable {
 
@@ -27,8 +28,7 @@ public class LicenseInformation implements Serializable {
 
     private Date getThirtyDaysFromNow() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 30);
-        return calendar.getTime();
+        return DateUtils.addDays(calendar.getTime(), 30);
     }
 
     public String getUniqueId() {
