@@ -19,7 +19,7 @@ public class LicenseValidationTest extends AbstractLicenceManagementTest {
 
     @Before
     public void setUp() {
-        decryptLicenseKey = new DecryptLicenseKey(readKeysFromFile());
+        decryptLicenseKey = new DecryptLicenseKey(new RSAKeyProducer());
         licenseValidation = new LicenseValidation(decryptLicenseKey);
     }
 

@@ -11,7 +11,7 @@ public class EncryptLicenseKeyTest extends AbstractLicenceManagementTest {
 
     @Before
     public void setUp() {
-        encrypt = new EncryptLicenseKey(readKeysFromFile());
+        encrypt = new EncryptLicenseKey(new RSAKeyProducer());
     }
 
     @Test

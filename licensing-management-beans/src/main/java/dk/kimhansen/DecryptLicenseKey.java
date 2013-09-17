@@ -3,24 +3,26 @@ package dk.kimhansen;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.SerializationUtils;
-import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.DataLengthException;
 import org.bouncycastle.crypto.InvalidCipherTextException;
 import org.bouncycastle.crypto.engines.RSAEngine;
 import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
 import org.bouncycastle.util.encoders.Base64;
 
+import dk.kimhansen.util.SerializationUtils;
+
 @Named
 public class DecryptLicenseKey extends AbstractEncryptDecryptLincenseKey {
 
     private static final long serialVersionUID = 1L;
 
-    public DecryptLicenseKey(final AsymmetricCipherKeyPair rsaKeys) {
-        super(rsaKeys);
+    @Inject
+    public DecryptLicenseKey(final RSAKeyProducer keyProducer) {
+        super(keyProducer.produceRSAKeyPair());
     }
 
     public LicenseInformation decrypt(final String crypted) throws DataLengthException, IllegalStateException, InvalidCipherTextException,
@@ -32,7 +34,7 @@ public class DecryptLicenseKey extends AbstractEncryptDecryptLincenseKey {
 
         PaddedBufferedBlockCipher decryptCipher = createDecryptCipherForDigest(digest);
         byte[] processed = processDataWithBufferedBlockCipher(cipherText, decryptCipher);
-        return (LicenseInformation) SerializationUtils.deserialize(processed);
+        return SerializationUtils.deserialize(processed, LicenseInformation.class);
     }
 
     private byte[] decryptDigestWithRSA(final byte[] digest) {

@@ -11,7 +11,7 @@ public class DecryptLicenseKeyTest extends AbstractLicenceManagementTest {
 
     @Before
     public void setUp() {
-        decryptLicenseKey = new DecryptLicenseKey(readKeysFromFile());
+        decryptLicenseKey = new DecryptLicenseKey(new RSAKeyProducer());
     }
 
     @Test
