@@ -24,17 +24,16 @@ public class DateTimeUtils {
 			String date = timestamp.replaceAll("\\+0([0-9]){1}\\:00", "+0$100");
 			return iso8601DateFormat.parse(date);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			return null;
 		}
 	}
 
 	public static String toIsoTimestamp(Date timestamp) {
 		try {
 			SimpleDateFormat iso8601DateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-			// String date = timestamp.replaceAll("\\+0([0-9]){1}\\:00", "+0$100");
 			return iso8601DateFormat.format(timestamp);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			return null;
 		}
 	}
 }
