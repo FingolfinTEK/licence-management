@@ -13,8 +13,6 @@ import org.bouncycastle.crypto.engines.RSAEngine;
 import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
 import org.bouncycastle.util.encoders.Base64;
 
-import dk.kimhansen.util.SerializationUtils;
-
 @Named
 public class DecryptLicenseKey extends AbstractEncryptDecryptLincenseKey {
 
@@ -34,7 +32,7 @@ public class DecryptLicenseKey extends AbstractEncryptDecryptLincenseKey {
 
         PaddedBufferedBlockCipher decryptCipher = createDecryptCipherForDigest(digest);
         byte[] processed = processDataWithBufferedBlockCipher(cipherText, decryptCipher);
-        return SerializationUtils.deserialize(processed, LicenseInformation.class);
+        return LicenseInformation.fromString(toUtf8String(processed));
     }
 
     private byte[] decryptDigestWithRSA(final byte[] digest) {
@@ -43,6 +41,14 @@ public class DecryptLicenseKey extends AbstractEncryptDecryptLincenseKey {
         byte[] data = Arrays.copyOfRange(digest, 0, 48);
         byte[] data2 = Arrays.copyOfRange(digest, 48, digest.length);
         return ArrayUtils.addAll(procesDataUsingRSA(rsaEngine, data), procesDataUsingRSA(rsaEngine, data2));
+    }
+
+    private String toUtf8String(final byte[] processed) {
+        try {
+            return new String(processed, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

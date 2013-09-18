@@ -15,8 +15,6 @@ import org.bouncycastle.crypto.engines.RSAEngine;
 import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
 import org.bouncycastle.util.encoders.Base64;
 
-import dk.kimhansen.util.SerializationUtils;
-
 @Named
 public class EncryptLicenseKey extends AbstractEncryptDecryptLincenseKey {
 
@@ -29,7 +27,7 @@ public class EncryptLicenseKey extends AbstractEncryptDecryptLincenseKey {
 
     public String encrypt(final LicenseInformation information) throws DataLengthException, IllegalStateException,
             InvalidCipherTextException, UnsupportedEncodingException {
-        byte[] data = SerializationUtils.serialize(information);
+        byte[] data = information.toString().getBytes("UTF-8");
         byte[] digest = createDigest(data);
 
         PaddedBufferedBlockCipher encryptCipher = createEncryptCipherForDigest(digest);

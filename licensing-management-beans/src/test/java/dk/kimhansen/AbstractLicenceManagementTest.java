@@ -33,13 +33,17 @@ public class AbstractLicenceManagementTest {
     }
 
     public LicenseInformation createTestData() {
+        return createTestData(new Date(123456789L));
+    }
+
+    public LicenseInformation createTestData(final Date expireTimestamp) {
         LicenseInformation info = new LicenseInformation();
         info.setContactEmail("some@some.other");
         info.setContactName("name");
         info.setOrganizationName("oname");
         info.setUniqueId("id");
         info.setExpire(true);
-        info.setExpireTimestamp(new Date(123456789L));
+        info.setExpireTimestamp(expireTimestamp);
         return info;
     }
 

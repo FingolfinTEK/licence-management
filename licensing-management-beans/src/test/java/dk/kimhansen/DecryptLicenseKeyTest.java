@@ -1,7 +1,6 @@
 package dk.kimhansen;
 
-import static org.junit.Assert.assertEquals;
-
+import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +16,7 @@ public class DecryptLicenseKeyTest extends AbstractLicenceManagementTest {
     @Test
     public void testDecrypt() throws Exception {
         LicenseInformation decrypted = decryptLicenseKey.decrypt(CIPHER_TEXT);
-        assertEquals(createTestData(), decrypted);
+        Assertions.assertThat(decrypted).isEqualTo(createTestData());
     }
 
 }

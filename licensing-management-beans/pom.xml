@@ -27,11 +27,12 @@
 			<version>2.4</version>
 		</dependency>
 
-		<!-- Remove when RSAKeyProducer is implemented -->
 		<dependency>
 			<groupId>com.esotericsoftware.kryo</groupId>
 			<artifactId>kryo</artifactId>
 			<version>2.16</version>
+			<!-- Uncomment when RSAKeyProducer is implemented -->
+			<!-- <scope>test</scope> -->
 		</dependency>
 	</dependencies>
 </project>
